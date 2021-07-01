@@ -1,32 +1,31 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer } = require("electron");
 //订阅
-global.subscribe = async (service, cb) => {
+const subscribe = (subscribe = async (service, cb) => {
   ipcRenderer.removeAllListeners(service);
   ipcRenderer.on(service, cb);
   return () => ipcRenderer.removeAllListeners(service);
-};
+});
 //发布
-global.publish = async (service, json = {}) => {
+const publish = (publish = async (service, json = {}) => {
   ipcRenderer.sendToHost(service, json);
-};
-// 取消订阅/取消监听
-global.unsubscribe = async (service) => {
-  if (service) {
-    ipcRenderer.removeAllListeners(service);
-  } else {
-    ipcRenderer.removeAllListeners();
-    global.initIcp();
-  }
-};
+});
+// // 取消订阅/取消监听
+// const unsubscribe = (unsubscribe = async (service) => {
+//   if (service) {
+//     ipcRenderer.removeAllListeners(service);
+//   } else {
+//     ipcRenderer.removeAllListeners();
+//   }
+// });
 
 //响应
-global.response = async (service, cb) => {
+const response = (response = async (service, cb) => {
   ipcRenderer.once(service, (event, json) => {
     cb(event, json);
   });
-};
+});
 //请求
-global.request = async (service, json, cb) => {
+const request = (request = async (service, json, cb) => {
   if (cb) {
     ipcRenderer.once(service, (event, json) => {
       return cb(event, json);
@@ -40,4 +39,6 @@ global.request = async (service, json, cb) => {
       ipcRenderer.sendToHost(service, json);
     });
   }
-};
+});
+
+export { subscribe, publish, response, request };
