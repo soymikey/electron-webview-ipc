@@ -1,16 +1,16 @@
 const { ipcRenderer } = require("electron");
 //订阅
-const subscribe = (subscribe = async (service, cb) => {
+const subscribe = async (service, cb) => {
   ipcRenderer.removeAllListeners(service);
   ipcRenderer.on(service, cb);
   return () => ipcRenderer.removeAllListeners(service);
-});
+};
 //发布
-const publish = (publish = async (service, json = {}) => {
+const publish = async (service, json = {}) => {
   ipcRenderer.sendToHost(service, json);
-});
+};
 // // 取消订阅/取消监听
-// const unsubscribe = (unsubscribe = async (service) => {
+// const unsubscribe = async (service) => {
 //   if (service) {
 //     ipcRenderer.removeAllListeners(service);
 //   } else {
@@ -19,13 +19,13 @@ const publish = (publish = async (service, json = {}) => {
 // });
 
 //响应
-const response = (response = async (service, cb) => {
+const response = async (service, cb) => {
   ipcRenderer.once(service, (event, json) => {
     cb(event, json);
   });
-});
+};
 //请求
-const request = (request = async (service, json, cb) => {
+const request = async (service, json, cb) => {
   if (cb) {
     ipcRenderer.once(service, (event, json) => {
       return cb(event, json);
@@ -39,6 +39,9 @@ const request = (request = async (service, json, cb) => {
       ipcRenderer.sendToHost(service, json);
     });
   }
-});
+};
 
-export { subscribe, publish, response, request };
+exports.subscribe = subscribe;
+exports.publish = publish;
+exports.response = response;
+exports.request = request;

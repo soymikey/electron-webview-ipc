@@ -9,10 +9,10 @@ once webview-dom has been loaded and listen on 'ipc-message',  To send message t
 
 `const ={ subscribe, publish, response, request }=require('electron-webview-ipc')`
 
-global.subscribe=subscribe
-global.publish=publish
-global.response=response
-global.request=request
+- global.subscribe=subscribe
+- global.publish=publish
+- global.response=response
+- global.request=request
 
 
 ##### electron.html
@@ -49,3 +49,8 @@ global.request=request
 
 
 Happy Coding~~
+
+
+
+
+

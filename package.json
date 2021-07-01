@@ -1,6 +1,6 @@
 {
   "name": "electron-webview-ipc",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "election commicate with webview",
   "main": "index.js",
   "scripts": {
