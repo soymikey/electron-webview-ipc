@@ -7,7 +7,7 @@ once webview-dom has been loaded and listen on 'ipc-message',  To send message t
 
 ##### preload.js
 
-`const ={ subscribe, publish, response, request }=require('electron-webview-ipc')`
+`const { subscribe, publish, response, request }=require('electron-webview-ipc')`
 
 - global.subscribe=subscribe
 - global.publish=publish
